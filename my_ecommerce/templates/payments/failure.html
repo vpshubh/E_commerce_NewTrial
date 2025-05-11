@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Failed - my_ecommerce{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Payment Failed</h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-times-circle text-danger" style="font-size: 4rem;"></i>
+                    </div>
+
+                    <h5 class="card-title">There was an issue with your payment</h5>
+                    <p class="card-text">Unfortunately, your payment could not be processed successfully.</p>
+
+                    <div class="alert alert-secondary">
+                        <p class="mb-0"><strong>Order Number:</strong> {{ order.order_number }}</p>
+                        <p class="mb-0"><strong>Error Message:</strong> {{ error_message|default:"Your payment failed to process. Please try again." }}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6>Common reasons for payment failure:</h6>
+                        <ul>
+                            <li>Insufficient funds in your account</li>
+                            <li>Incorrect credit card information</li>
+                            <li>Card expiration date has passed</li>
+                            <li>Your bank declined the transaction</li>
+                            <li>Technical issues with the payment processor</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6>What can you do now?</h6>
+                        <ol>
+                            <li>Check your payment details and try again</li>
+                            <li>Try a different payment method</li>
+                            <li>Contact your bank if the issue persists</li>
+                            <li>Contact our customer support for assistance</li>
+                        </ol>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'payments:checkout' order.id %}" class="btn btn-primary">Try Again</a>
+                        <a href="{% url 'cart:view' %}" class="btn btn-outline-secondary ml-2">Return to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
