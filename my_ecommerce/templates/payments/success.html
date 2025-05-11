@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Successful - my_ecommerce{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Payment Successful!</h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+
+                    <h5 class="card-title">Thank you for your order!</h5>
+                    <p class="card-text">Your payment has been processed successfully and your order is confirmed.</p>
+
+                    <div class="alert alert-info">
+                        <p class="mb-0"><strong>Order Number:</strong> {{ order.order_number }}</p>
+                        <p class="mb-0"><strong>Order Date:</strong> {{ order.created_at|date:"F j, Y" }}</p>
+                        <p class="mb-0"><strong>Total Amount:</strong> ${{ order.get_total|floatformat:2 }}</p>
+                    </div>
+
+                    <p>A confirmation email has been sent to <strong>{{ order.email }}</strong> with your order details.</p>
+
+                    <div class="mt-4">
+                        <h6>What happens next?</h6>
+                        <ol>
+                            <li>Your order is being processed by our team</li>
+                            <li>You'll receive an email when your items are shipped</li>
+                            <li>You can track your order in your account dashboard</li>
+                        </ol>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'orders:detail' order.id %}" class="btn btn-primary">View Order Details</a>
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary ml-2">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
